@@ -1,0 +1,32 @@
+{
+  "collectionName": "components_shared_links",
+  "info": {
+    "displayName": "link",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_link": {
+      "type": "string"
+    },
+    "cta_target": {
+      "type": "enumeration",
+      "enum": [
+        "stessa_scheda",
+        "nuova_scheda"
+      ],
+      "default": "stessa_scheda"
+    },
+    "background_color": {
+      "type": "enumeration",
+      "enum": [
+        "blu",
+        "giallo"
+      ],
+      "default": "blu"
+    }
+  }
+}

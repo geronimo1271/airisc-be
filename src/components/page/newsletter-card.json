@@ -1,0 +1,24 @@
+{
+  "collectionName": "components_page_newsletter_cards",
+  "info": {
+    "displayName": "Newsletter Card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "background_color": {
+      "type": "enumeration",
+      "enum": [
+        "lavanda"
+      ],
+      "default": "lavanda"
+    }
+  }
+}

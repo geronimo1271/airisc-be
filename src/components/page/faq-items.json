@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_page_faq_items",
+  "info": {
+    "displayName": "FAQ Items",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_link": {
+      "type": "string"
+    },
+    "faqs": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::faq.faq"
+    },
+    "cta_target": {
+      "type": "enumeration",
+      "enum": ["stessa_scheda", "nuova_scheda"],
+      "default": "stessa_scheda"
+    }
+  }
+}

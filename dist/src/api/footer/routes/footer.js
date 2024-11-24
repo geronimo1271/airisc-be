@@ -1,0 +1,8 @@
+"use strict";
+/**
+ * footer router
+ */
+Object.defineProperty(exports, "__esModule", { value: true });
+const strapi_1 = require("@strapi/strapi");
+exports.default = strapi_1.factories.createCoreRouter('api::footer.footer');
+//# sourceMappingURL=footer.js.map

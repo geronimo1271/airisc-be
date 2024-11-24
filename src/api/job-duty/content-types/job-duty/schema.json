@@ -1,0 +1,33 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_duties",
+  "info": {
+    "singularName": "job-duty",
+    "pluralName": "job-duties",
+    "displayName": "Lavoro - Mansione"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "job_sector": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::job-sector.job-sector",
+      "inversedBy": "job_duties"
+    }
+  }
+}

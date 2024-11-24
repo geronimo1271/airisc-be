@@ -1,0 +1,26 @@
+{
+  "collectionName": "components_footer_socials",
+  "info": {
+    "displayName": "Social",
+    "icon": "",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "url": {
+      "type": "string"
+    },
+    "icon": {
+      "type": "enumeration",
+      "enum": [
+        "facebook",
+        "twitter",
+        "instagram",
+        "youtube"
+      ]
+    }
+  }
+}

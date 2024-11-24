@@ -1,0 +1,33 @@
+{
+  "collectionName": "components_page_job_application_cards",
+  "info": {
+    "displayName": "Job Application Card"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "background_color": {
+      "type": "enumeration",
+      "enum": ["lavanda"],
+      "default": "lavanda"
+    },
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_placement": {
+      "type": "enumeration",
+      "enum": ["sinistra", "centro", "destro"],
+      "default": "sinistra"
+    }
+  }
+}

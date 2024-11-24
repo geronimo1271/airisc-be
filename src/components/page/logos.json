@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_page_logos",
+  "info": {
+    "displayName": "Logos"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "items": {
+      "displayName": "Logo item",
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.logo-item",
+      "required": true
+    }
+  }
+}

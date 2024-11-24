@@ -1,0 +1,51 @@
+version: '3.9'
+
+services:
+  redis:
+    image: 'redis:7-alpine'
+    ports:
+      - 6379:6379
+
+  db:
+    image: 'mariadb:10.7-focal'
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+
+  web:
+    build:
+      context: .
+      # target: dev
+      dockerfile: Dockerfile.dev
+    # NOTE: Aggiungere questa riga per il MacBook con chip M1
+    platform: linux/arm64
+    env_file: .env.docker
+    restart: on-failure
+    environment:
+      NODE_ENV: ${NODE_ENV}
+      DATABASE_HOST: db
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      REDIS_DB: 1
+      DOCKERIZED: 'true'
+    volumes:
+      - ./config:/opt/app/config
+      - ./src:/opt/app/src
+      - ./package.json:/opt/package.json
+      - ./yarn.lock:/opt/yarn.lock
+      - ./.env.docker:/opt/app/.env
+      - ./public/uploads:/opt/app/public/uploads
+      # - .:/app
+      # - $HOME/.ssh/:/root/.ssh
+    working_dir: /opt/app
+    ports:
+      - 1337:1337
+    depends_on:
+      - db
+      - redis
+
+volumes:
+  db_data:

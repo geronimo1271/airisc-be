@@ -1,0 +1,23 @@
+{
+  "collectionName": "components_page_page_link_lines",
+  "info": {
+    "displayName": "Page Link Line",
+    "icon": "code",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "prev_page_label": {
+      "type": "string"
+    },
+    "prev_page_link": {
+      "type": "string"
+    },
+    "next_page_label": {
+      "type": "string"
+    },
+    "next_page_link": {
+      "type": "string"
+    }
+  }
+}

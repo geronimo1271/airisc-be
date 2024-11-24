@@ -1,0 +1,79 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_applications",
+  "info": {
+    "singularName": "job-application",
+    "pluralName": "job-applications",
+    "displayName": "Lavoro - Candidature",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "first_name": {
+      "type": "string",
+      "required": true
+    },
+    "last_name": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "cv": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": ["images", "files"]
+    },
+    "languages": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      },
+      "type": "customField",
+      "options": [
+        "Italiano:italiano",
+        "Inglese:inglese",
+        "Francese:francese",
+        "Tedesco:tedesco",
+        "Altre:altre"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "age": {
+      "type": "integer",
+      "max": 99,
+      "min": 18,
+      "required": true
+    },
+    "job_offer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-offer.job-offer"
+    },
+    "work_sector": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-sector.job-sector"
+    },
+    "has_own_accommodation": {
+      "type": "boolean"
+    },
+    "relocates_with_family": {
+      "type": "boolean"
+    },
+    "car_owner": {
+      "type": "boolean"
+    },
+    "privacy": {
+      "type": "boolean",
+      "required": true
+    }
+  }
+}

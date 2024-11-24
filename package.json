@@ -1,0 +1,59 @@
+{
+  "name": "live-and-work-be",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A Strapi application",
+  "license": "MIT",
+  "author": {
+    "name": "A Strapi developer"
+  },
+  "scripts": {
+    "build": "strapi build",
+    "develop": "strapi develop",
+    "start": "strapi start",
+    "strapi": "strapi"
+  },
+  "prettier": {
+    "singleQuote": true
+  },
+  "dependencies": {
+    "@ckeditor/strapi-plugin-ckeditor": "^0.0.10",
+    "@strapi/plugin-documentation": "^4.14.5",
+    "@strapi/plugin-i18n": "4.14.5",
+    "@strapi/plugin-sentry": "^4.14.5",
+    "@strapi/plugin-seo": "^1.9.6",
+    "@strapi/plugin-users-permissions": "4.14.5",
+    "@strapi/provider-email-nodemailer": "^4.14.5",
+    "@strapi/strapi": "4.14.5",
+    "fuse.js": "^7.0.0",
+    "handlebars": "^4.7.8",
+    "mysql": "2.18.1",
+    "mysql2": "^3.6.5",
+    "qrcode": "^1.5.3",
+    "react-dom": "^18.2.0",
+    "redis": "^4.6.12",
+    "strapi-plugin-duplicate-button": "^1.1.13",
+    "strapi-plugin-fuzzy-search": "^2.1.2",
+    "strapi-plugin-local-image-sharp": "^1.7.0",
+    "strapi-plugin-menus": "^1.5.0",
+    "strapi-plugin-multi-select": "^1.2.2",
+    "strapi-plugin-preview-button": "^2.2.1",
+    "strapi-plugin-redis": "^1.0.1",
+    "strapi-plugin-rest-cache": "^4.2.8",
+    "strapi-provider-rest-cache-redis": "^4.2.8"
+  },
+  "devDependencies": {
+    "@types/qrcode": "^1.5.5",
+    "shipit": "^1.2.0",
+    "shipit-cli": "^5.3.0",
+    "shipit-deploy": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0 <=20.x.x",
+    "npm": ">=6.0.0"
+  },
+  "strapi": {
+    "uuid": "67ca8719-2ed1-4736-bc8e-f4491415d2ea",
+    "telemetryDisabled": true
+  }
+}

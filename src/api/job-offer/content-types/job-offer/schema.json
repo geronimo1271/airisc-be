@@ -1,0 +1,233 @@
+{
+  "kind": "collectionType",
+  "collectionName": "job_offers",
+  "info": {
+    "singularName": "job-offer",
+    "pluralName": "job-offers",
+    "displayName": "Lavoro - Offerte",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "name": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string",
+      "required": true
+    },
+    "work_description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "required": true,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "contract_type": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "tempo_indeterminato",
+        "tempo_determinato",
+        "apprendistato"
+      ],
+      "required": true
+    },
+    "location": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ],
+      "pluginOptions": {
+        "i18n": {
+          "localized": false
+        }
+      }
+    },
+    "work_sector": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::job-sector.job-sector"
+    },
+    "work_duties": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::job-duty.job-duty"
+    },
+    "experience_level": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "senior",
+        "junior"
+      ],
+      "required": false
+    },
+    "education_level": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "enumeration",
+      "enum": [
+        "laurea_magistrale",
+        "laurea_triennale",
+        "diploma_scuola_superiore"
+      ],
+      "required": false
+    },
+    "languages": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "customField",
+      "options": [
+        "Italiano:italiano",
+        "Inglese:inglese",
+        "Francese:francese",
+        "Tedesco:tedesco",
+        "Altre:altre"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "gross_salary": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "integer"
+    },
+    "work_duty_description": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "required": false,
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "benefits": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "customField",
+      "options": [
+        "Italiano:italiano",
+        "Inglese:inglese",
+        "Francese:francese",
+        "Tedesco:tedesco",
+        "Altre:altre"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "work_environment": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "customField",
+      "options": [
+        "Italiano:italiano",
+        "Inglese:inglese",
+        "Francese:francese",
+        "Tedesco:tedesco",
+        "Altre:altre"
+      ],
+      "customField": "plugin::multi-select.multi-select"
+    },
+    "slug": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "date_from": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "date"
+    },
+    "date_to": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "date"
+    },
+    "blocks": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "shared.text-item",
+        "page.job-offer-cards",
+        "page.faq-items",
+        "page.job-application-card"
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.seo"
+    }
+  }
+}

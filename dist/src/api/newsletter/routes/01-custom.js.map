@@ -1,0 +1,1 @@
+{"version":3,"file":"01-custom.js","sourceRoot":"","sources":["../../../../../src/api/newsletter/routes/01-custom.ts"],"names":[],"mappings":";;AAAA,kBAAe;IACb,MAAM,EAAE;QACN;YACE,MAAM,EAAE,KAAK;YACb,IAAI,EAAE,4BAA4B;YAClC,OAAO,EAAE,0BAA0B;YACnC,MAAM,EAAE;gBACN,QAAQ,EAAE,EAAE;gBACZ,WAAW,EAAE,EAAE;aAChB;SACF;KACF;CACF,CAAC"}

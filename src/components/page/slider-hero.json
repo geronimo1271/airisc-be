@@ -1,0 +1,15 @@
+{
+  "collectionName": "components_page_slider_heroes",
+  "info": {
+    "displayName": "Slider Hero"
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "page.hero",
+      "min": 1
+    }
+  }
+}
