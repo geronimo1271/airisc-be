@@ -10,9 +10,9 @@ export default () => {
         connectionString: env('DATABASE_URL'),
         host: env('DATABASE_HOST', 'localhost'),
         port: env.int('DATABASE_PORT', 3306),
-        database: env('DATABASE_NAME', 'strapi'),
-        user: env('DATABASE_USERNAME', 'strapi'),
-        password: env('DATABASE_PASSWORD', 'strapi'),
+        database: env('DATABASE_NAME', 'airisc_strapi'),
+        user: env('DATABASE_USERNAME', 'nivorago'),
+        password: env('DATABASE_PASSWORD', 'Giorgio77!'),
         ssl: env.bool('DATABASE_SSL', false) && {
           key: env('DATABASE_SSL_KEY', undefined),
           cert: env('DATABASE_SSL_CERT', undefined),
@@ -32,10 +32,10 @@ export default () => {
     },
     mysql2: {
       connection: {
-        host: env('DATABASE_HOST', 'localhost'),
+        host: env('DATABASE_HOST', '127.0.0.1'),
         port: env.int('DATABASE_PORT', 3306),
         database: env('DATABASE_NAME', 'airisc_strapi'),
-        user: env('DATABASE_USERNAME', 'strapi'),
+        user: env('DATABASE_USERNAME', 'nivorago'),
         password: env('DATABASE_PASSWORD', 'Giorgio77!'),
         ssl: env.bool('DATABASE_SSL', false) && {
           key: env('DATABASE_SSL_KEY', undefined),

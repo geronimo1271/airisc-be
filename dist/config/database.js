@@ -13,9 +13,9 @@ exports.default = () => {
                 connectionString: (0, utils_1.env)('DATABASE_URL'),
                 host: (0, utils_1.env)('DATABASE_HOST', 'localhost'),
                 port: utils_1.env.int('DATABASE_PORT', 3306),
-                database: (0, utils_1.env)('DATABASE_NAME', 'strapi'),
-                user: (0, utils_1.env)('DATABASE_USERNAME', 'strapi'),
-                password: (0, utils_1.env)('DATABASE_PASSWORD', 'strapi'),
+                database: (0, utils_1.env)('DATABASE_NAME', 'airisc_strapi'),
+                user: (0, utils_1.env)('DATABASE_USERNAME', 'nivorago'),
+                password: (0, utils_1.env)('DATABASE_PASSWORD', 'Giorgio77!'),
                 ssl: utils_1.env.bool('DATABASE_SSL', false) && {
                     key: (0, utils_1.env)('DATABASE_SSL_KEY', undefined),
                     cert: (0, utils_1.env)('DATABASE_SSL_CERT', undefined),
@@ -32,10 +32,10 @@ exports.default = () => {
         },
         mysql2: {
             connection: {
-                host: (0, utils_1.env)('DATABASE_HOST', 'localhost'),
+                host: (0, utils_1.env)('DATABASE_HOST', '127.0.0.1'),
                 port: utils_1.env.int('DATABASE_PORT', 3306),
                 database: (0, utils_1.env)('DATABASE_NAME', 'airisc_strapi'),
-                user: (0, utils_1.env)('DATABASE_USERNAME', 'strapi'),
+                user: (0, utils_1.env)('DATABASE_USERNAME', 'nivorago'),
                 password: (0, utils_1.env)('DATABASE_PASSWORD', 'Giorgio77!'),
                 ssl: utils_1.env.bool('DATABASE_SSL', false) && {
                     key: (0, utils_1.env)('DATABASE_SSL_KEY', undefined),
