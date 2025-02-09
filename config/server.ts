@@ -10,6 +10,10 @@ export default () => ({
   webhooks: {
     populateRelations: env.bool('WEBHOOKS_POPULATE_RELATIONS', false),
   },
+  admin: {
+    url: env('ADMIN_URL', '/admin'),  // Imposta l'URL dell'admin
+    autoOpen: false,
+  },
   url: env('HOSTNAME', 'http://localhost:1337'),
   cron: {
     enabled: true,
