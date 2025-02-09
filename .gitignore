@@ -8,9 +8,6 @@ yarn-debug.log*
 yarn-error.log*
 yarn.lock
 
-# Configurazione locale
-.env
-
 # Runtime data
 pids
 *.pid
