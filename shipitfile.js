@@ -16,16 +16,16 @@ module.exports = (shipit) => {
       deleteOnRollback: false,
     },
     staging: {
-      deployTo: '/space/htdocs/crewbe',
-      servers: 'crewbe@34.159.16.110',
+      deployTo: '/home/airisc-be/airisc-be',
+      servers: 'airisc-be@204.216.223.58',
       branch: 'staging',
       port: 3004,
     },
     production: {
-      deployTo: '/space/htdocs/crewbe',
-      servers: 'crewbe@34.159.16.110',
+      deployTo: '/home/airisc-be/airisc-be',
+      servers: 'airisc-be@204.216.223.58',
       branch: 'main',
-      port: 3002,
+      port: 3000,
     },
   });
 
