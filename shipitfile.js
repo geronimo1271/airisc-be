@@ -3,10 +3,10 @@ module.exports = (shipit) => {
 
   const repositoryUrlPrefix =
     process.env.DEPLOY_ENV === 'gitlab'
-      ? `https://gitlab-ci-token:${process.env.CI_JOB_TOKEN}@git.develondigital.com/`
-      : 'git@git.develondigital.com:';
+      ? 'git@github.com:'
+      : 'git@github.com:';
 
-  const repositoryUrl = 'livigno/live-and-work-be.git';
+  const repositoryUrl = 'geronimo1271/airisc-be.git';
 
   shipit.initConfig({
     default: {
@@ -18,8 +18,8 @@ module.exports = (shipit) => {
     staging: {
       deployTo: '/home/airisc-be/airisc-be',
       servers: 'airisc-be@204.216.223.58',
-      branch: 'staging',
-      port: 3004,
+      branch: 'main',
+      port: 3000,
     },
     production: {
       deployTo: '/home/airisc-be/airisc-be',
