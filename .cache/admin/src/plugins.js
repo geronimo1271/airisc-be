@@ -6,6 +6,7 @@ import duplicateButton from 'strapi-plugin-duplicate-button/strapi-admin';
 import menus from 'strapi-plugin-menus/strapi-admin';
 import previewButton from 'strapi-plugin-preview-button/strapi-admin';
 import restCache from 'strapi-plugin-rest-cache/strapi-admin';
+import sentry from '@strapi/plugin-sentry/strapi-admin';
 import seo from '@strapi/plugin-seo/strapi-admin';
 import ckeditor from '@ckeditor/strapi-plugin-ckeditor/strapi-admin';
 import documentation from '@strapi/plugin-documentation/strapi-admin';
@@ -22,6 +23,7 @@ const plugins = {
   'menus': menus,
   'preview-button': previewButton,
   'rest-cache': restCache,
+  'sentry': sentry,
   'seo': seo,
   'ckeditor': ckeditor,
   'documentation': documentation,

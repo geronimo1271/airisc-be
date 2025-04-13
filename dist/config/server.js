@@ -7,7 +7,7 @@ const utils_1 = require("@strapi/utils");
 const cron_tasks_1 = __importDefault(require("./cron-tasks"));
 exports.default = () => ({
     host: (0, utils_1.env)('HOST', '0.0.0.0'),
-    port: utils_1.env.int('PORT', 3002),
+    port: utils_1.env.int('PORT', 1337),
     app: {
         keys: utils_1.env.array('APP_KEYS'),
     },
@@ -18,7 +18,7 @@ exports.default = () => ({
         url: (0, utils_1.env)('ADMIN_URL', '/admin'),
         autoOpen: false,
     },
-    url: (0, utils_1.env)('HOSTNAME', 'http://localhost:3002'),
+    url: (0, utils_1.env)('PUBLIC_URL', 'http://localhost:1337'),
     cron: {
         enabled: true,
         tasks: cron_tasks_1.default,

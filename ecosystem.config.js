@@ -5,7 +5,7 @@ module.exports = {
   apps: [
     {
       name: pkg.name,
-      cwd: `${process.env.PWD}/current`,
+      cwd: `${process.env.PWD}`,
       autorestart: true,
       script: 'server.js',
       instances,
