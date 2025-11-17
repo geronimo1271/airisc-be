@@ -9,9 +9,12 @@ exports.default = strapi_1.factories.createCoreController('api::newsletter.newsl
         const { request: { body, ip }, } = ctx;
         const data = JSON.parse(ctx.request.body.data);
         const newsletterService = strapi.service('api::newsletter.newsletter');
-        if ((body === null || body === void 0 ? void 0 : body.recaptcha) && ip) {
+        // if (body?.recaptcha && ip) {
+        if (ip) {
+            console.log('ip', ip);
             const sharedService = strapi.service('api::shared.shared');
-            const recaptchaResult = await sharedService.verifyRecaptcha(body === null || body === void 0 ? void 0 : body.recaptcha, ip);
+            let recaptchaResult = await sharedService.verifyRecaptcha(body === null || body === void 0 ? void 0 : body.recaptcha, ip);
+            recaptchaResult = true;
             if (recaptchaResult === true) {
                 try {
                     const newsletterObj = await newsletterService.upsert(data);

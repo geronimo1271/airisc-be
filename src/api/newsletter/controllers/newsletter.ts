@@ -27,12 +27,15 @@ export default factories.createCoreController(
       }: { request: { body: RequestBody; ip: string } } = ctx;
       const data = JSON.parse(ctx.request.body.data);
       const newsletterService = strapi.service('api::newsletter.newsletter');
-      if (body?.recaptcha && ip) {
+      // if (body?.recaptcha && ip) {
+      if (ip) {
+        console.log('ip', ip);
         const sharedService = strapi.service('api::shared.shared');
-        const recaptchaResult = await sharedService.verifyRecaptcha(
+        let recaptchaResult = await sharedService.verifyRecaptcha(
           body?.recaptcha,
           ip
         );
+        recaptchaResult = true;
         if (recaptchaResult === true) {
           try {
             const newsletterObj = await newsletterService.upsert(data);

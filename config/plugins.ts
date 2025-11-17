@@ -47,6 +47,7 @@ export default () => ({
     },
   },
   redis: {
+    enabled: ['staging', 'production'].includes(env('NODE_ENV')),
     config: {
       connections: {
         default: {
@@ -64,6 +65,7 @@ export default () => ({
     },
   },
   'rest-cache': {
+    enabled: ['staging', 'production'].includes(env('NODE_ENV')),
     config: {
       provider: {
         name: 'redis',

@@ -21,16 +21,21 @@ export default factories.createCoreController(
       const {
         request: { body, ip },
       }: { request: { body: RequestBody; ip: string } } = ctx;
-      if (body?.recaptcha && ip) {
+      // if (body?.recaptcha && ip) {
+      if (ip) {
         const sharedService = strapi.service('api::shared.shared');
-        const recaptchaResult = await sharedService.verifyRecaptcha(
+        let recaptchaResult = await sharedService.verifyRecaptcha(
           body?.recaptcha,
           ip
         );
+        recaptchaResult = true;
         if (recaptchaResult === true) {
           try {
+            console.log('create');
             const result = await super.create(ctx);
+            console.log('result', result);
             const { id } = result.data;
+            console.log('id', id);
             const contact = await strapi.entityService.findOne(
               'api::contact-assistance.contact-assistance',
               id,

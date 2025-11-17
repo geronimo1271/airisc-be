@@ -93,3 +93,10 @@ sw.*
 src/extensions/documentation/documentation/1.0.0/full_documentation.json
 .strapi-updater.json
 .env
+types/.DS_Store
+src/components/.DS_Store
+public/.DS_Store
+src/.DS_Store
+src/api/.DS_Store
+src/components/.DS_Store
+.DS_Store

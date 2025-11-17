@@ -16,36 +16,36 @@ const options = [
   {
     value: 'monthly_conventions',
     label: {
-      it: 'Conventioni mensili',
-      en: 'Monthly conventions',
+      it: 'Convegni e seminari',
+      en: 'Conferences and seminars',
     },
   },
   {
     value: 'advices',
     label: {
-      it: 'Suggerimenti',
-      en: 'Advices',
+      it: 'Ricerca scientifica',
+      en: 'Scientific research',
     },
   },
   {
     value: 'training_courses',
     label: {
-      it: 'Corsi di formazione',
-      en: 'Training courses',
+      it: 'Webinar e Articoli scientifici',
+      en: 'Webinars and scientific articles',
     },
   },
   {
     value: 'new_job_offers',
     label: {
-      it: 'Nuove offerte di lavoro',
-      en: 'New job offers',
+      it: 'Sport, Salute e Benessere',
+      en: 'Sport, Health and Well-being',
     },
   },
   {
     value: 'new_conventions',
     label: {
-      it: 'Nuove conventioni',
-      en: 'New conventions',
+      it: 'Burocrazia, Leggi e Istituzioni',
+      en: 'Bureaucracy, Legislation and Institutions',
     },
   },
 ];
