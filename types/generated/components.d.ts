@@ -116,6 +116,19 @@ export interface PageContentIntro extends Schema.Component {
   };
 }
 
+export interface PageContentSpecialist extends Schema.Component {
+  collectionName: 'components_page_content_specialists';
+  info: {
+    displayName: 'Content Specialist';
+    icon: 'cloud';
+  };
+  attributes: {
+    Title: Attribute.String;
+    OperationUnit: Attribute.RichText;
+    JobDescription: Attribute.RichText;
+  };
+}
+
 export interface PageFaqItems extends Schema.Component {
   collectionName: 'components_page_faq_items';
   info: {
@@ -546,6 +559,7 @@ declare module '@strapi/types' {
       'page.app-links-card': PageAppLinksCard;
       'page.content-chapter': PageContentChapter;
       'page.content-intro': PageContentIntro;
+      'page.content-specialist': PageContentSpecialist;
       'page.faq-items': PageFaqItems;
       'page.hero': PageHero;
       'page.job-application-card': PageJobApplicationCard;

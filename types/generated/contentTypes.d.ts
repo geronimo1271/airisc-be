@@ -2402,6 +2402,7 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
     singularName: 'testimonial';
     pluralName: 'testimonials';
     displayName: 'Testimonianze';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -2433,6 +2434,19 @@ export interface ApiTestimonialTestimonial extends Schema.CollectionType {
       }>;
     description: Attribute.Text &
       Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    JobDescription: Attribute.RichText &
+      Attribute.CustomField<
+        'plugin::ckeditor.CKEditor',
+        {
+          output: 'HTML';
+          preset: 'standard';
+        }
+      > &
       Attribute.SetPluginOptions<{
         i18n: {
           localized: true;

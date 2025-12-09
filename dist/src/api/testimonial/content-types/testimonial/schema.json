@@ -4,7 +4,8 @@
     "info": {
         "singularName": "testimonial",
         "pluralName": "testimonials",
-        "displayName": "Testimonianze"
+        "displayName": "Testimonianze",
+        "description": ""
     },
     "options": {
         "draftAndPublish": true
@@ -33,9 +34,12 @@
             "type": "string"
         },
         "picture": {
-            "allowedTypes": ["images"],
             "type": "media",
             "multiple": false,
+            "required": false,
+            "allowedTypes": [
+                "images"
+            ],
             "pluginOptions": {
                 "i18n": {
                     "localized": false
@@ -50,6 +54,19 @@
             },
             "type": "text",
             "required": true
+        },
+        "JobDescription": {
+            "pluginOptions": {
+                "i18n": {
+                    "localized": true
+                }
+            },
+            "type": "customField",
+            "options": {
+                "output": "HTML",
+                "preset": "standard"
+            },
+            "customField": "plugin::ckeditor.CKEditor"
         }
     }
 }

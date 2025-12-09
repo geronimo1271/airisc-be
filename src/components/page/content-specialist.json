@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_page_content_specialists",
+  "info": {
+    "displayName": "Content Specialist",
+    "icon": "cloud"
+  },
+  "options": {},
+  "attributes": {
+    "Title": {
+      "type": "string"
+    },
+    "OperationUnit": {
+      "type": "richtext"
+    },
+    "JobDescription": {
+      "type": "richtext"
+    }
+  }
+}
