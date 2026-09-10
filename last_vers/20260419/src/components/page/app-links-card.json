@@ -1,0 +1,57 @@
+{
+  "collectionName": "components_page_app_links_cards",
+  "info": {
+    "displayName": "App Links Card",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "text": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "background_image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "background_image_alt_text": {
+      "type": "string"
+    },
+    "qr_code_title": {
+      "type": "string"
+    },
+    "promos_title": {
+      "type": "string"
+    },
+    "promos_description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "promos_cta_label": {
+      "type": "string"
+    },
+    "promos_cta_target": {
+      "type": "enumeration",
+      "enum": [
+        "stessa_scheda",
+        "nuova_scheda"
+      ],
+      "default": "stessa_scheda"
+    }
+  }
+}

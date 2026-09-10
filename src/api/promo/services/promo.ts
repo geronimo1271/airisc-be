@@ -3,30 +3,52 @@
  */
 
 import { factories } from '@strapi/strapi';
-import { env } from '@strapi/utils';
 import axios from 'axios';
+
+/** Evita ERR_INVALID_URL se la variabile manca o non è un URL assoluto (cron / .env). */
+function readPromoApiUrl(envKey: string): URL | null {
+  const raw = process.env[envKey];
+  if (raw == null || String(raw).trim() === '') {
+    return null;
+  }
+  try {
+    return new URL(String(raw).trim());
+  } catch {
+    console.warn(
+      `[promo service] ${envKey} non è un URL valido (valore ignorato)`
+    );
+    return null;
+  }
+}
 
 export default factories.createCoreService(
   'api::promo.promo',
   ({ strapi }) => ({
     async import() {
-      console.log(`[promo service] - Importing promos - start`);
-      // API URL for categories import
-      await upsertPromoCategories(strapi);
-
-      // import typlogies
-      await upsertPromoTypologies(strapi);
-
-      // import promos
-      const upsertPromosCount = await upsertPromos(strapi);
-      console.log(`[promo service] - Importing promos - end`);
-      return upsertPromosCount;
+      try {
+        console.log(`[promo service] - Importing promos - start`);
+        await upsertPromoCategories(strapi);
+        await upsertPromoTypologies(strapi);
+        const upsertPromosCount = await upsertPromos(strapi);
+        console.log(`[promo service] - Importing promos - end`);
+        return upsertPromosCount;
+      } catch (error) {
+        console.error('[promo service] Import fallito:', error);
+        return 0;
+      }
     },
   })
 );
 
 async function upsertPromoCategories(strapi: any) {
   console.log(`[promo service] - [upsertPromoCategories] - start`);
+  const baseUrl = readPromoApiUrl('PROMO_CATEGORIES_API_URL');
+  if (!baseUrl) {
+    console.warn(
+      '[promo service] [upsertPromoCategories] skipped: imposta PROMO_CATEGORIES_API_URL nel .env (URL assoluto)'
+    );
+    return;
+  }
   const sharedService = strapi.service('api::shared.shared');
   const locales = ['en', 'it', 'de'];
   const categoriesMap: Record<
@@ -44,7 +66,7 @@ async function upsertPromoCategories(strapi: any) {
   > = {};
 
   for (const locale of locales) {
-    const apiUrl = new URL(env('PROMO_CATEGORIES_API_URL'));
+    const apiUrl = new URL(baseUrl.href);
     apiUrl.searchParams.append('locale', locale);
     const categoriesResponse = await axios.get(apiUrl.toString());
 
@@ -139,6 +161,13 @@ async function upsertPromoCategories(strapi: any) {
 
 async function upsertPromoTypologies(strapi: any) {
   console.log(`[promo service] - [upsertPromoTypologies] - start`);
+  const baseUrl = readPromoApiUrl('PROMO_TYPOLOGIES_API_URL');
+  if (!baseUrl) {
+    console.warn(
+      '[promo service] [upsertPromoTypologies] skipped: imposta PROMO_TYPOLOGIES_API_URL nel .env (URL assoluto)'
+    );
+    return;
+  }
   const sharedService = strapi.service('api::shared.shared');
   const locales = ['en', 'it', 'de'];
   const typologiesMap: Record<
@@ -150,7 +179,7 @@ async function upsertPromoTypologies(strapi: any) {
   > = {};
 
   for (const locale of locales) {
-    const apiUrl = new URL(env('PROMO_TYPOLOGIES_API_URL'));
+    const apiUrl = new URL(baseUrl.href);
     apiUrl.searchParams.append('locale', locale);
     const typologiesResponse = await axios.get(apiUrl.toString());
 
@@ -199,6 +228,13 @@ async function upsertPromoTypologies(strapi: any) {
 
 async function upsertPromos(strapi) {
   console.log(`[promo service] - [upsertPromos] - start`);
+  const baseUrl = readPromoApiUrl('PROMO_PRODUCTS_API_URL');
+  if (!baseUrl) {
+    console.warn(
+      '[promo service] [upsertPromos] skipped: imposta PROMO_PRODUCTS_API_URL nel .env (URL assoluto)'
+    );
+    return 0;
+  }
   const sharedService = strapi.service('api::shared.shared');
   const locales = ['en', 'it', 'de'];
   const promosMap: Record<
@@ -214,7 +250,7 @@ async function upsertPromos(strapi) {
   > = {};
 
   for (const locale of locales) {
-    const apiUrl = new URL(env('PROMO_PRODUCTS_API_URL'));
+    const apiUrl = new URL(baseUrl.href);
     apiUrl.searchParams.append('locale', locale);
     const promosResponse = await axios.get(apiUrl.toString());
 
@@ -225,20 +261,27 @@ async function upsertPromos(strapi) {
     const promos = promosResponse.data.products[`C-CREW`].services;
     for (const promo of promos) {
       if (!promosMap[promo.code]) {
-        const categoryId = (await getPromoCategoryByCode(promo.category?.code))
-          ?.id;
+        const categoryId = (
+          await getPromoCategoryByCode(promo.category?.code, strapi)
+        )?.id;
         const subcategoryIds = [];
         const typologyIds = [];
         const subcategories = promo.subcategories || [];
         const typologies = promo.typologies || [];
         for (const subcategory of subcategories) {
-          const subId = await getPromoSubcategoryByCode(subcategory.code);
+          const subId = await getPromoSubcategoryByCode(
+            subcategory.code,
+            strapi
+          );
           if (subId) {
             subcategoryIds.push(subId.id);
           }
         }
         for (const typology of typologies) {
-          const typologyId = await getPromoTypologyByCode(typology.code);
+          const typologyId = await getPromoTypologyByCode(
+            typology.code,
+            strapi
+          );
           if (typologyId) {
             typologyIds.push(typologyId.id);
           }
@@ -283,7 +326,7 @@ async function upsertPromos(strapi) {
   return Object.keys(promosMap).length;
 }
 
-async function getPromoCategoryByCode(code: string) {
+async function getPromoCategoryByCode(code: string, strapi: any) {
   if (!code) return null;
   return await strapi.db.query('api::promo-category.promo-category').findOne({
     where: { code: code },
@@ -291,7 +334,7 @@ async function getPromoCategoryByCode(code: string) {
   });
 }
 
-async function getPromoSubcategoryByCode(code: string) {
+async function getPromoSubcategoryByCode(code: string, strapi: any) {
   if (!code) return null;
   return await strapi.db
     .query('api::promo-subcategory.promo-subcategory')
@@ -301,7 +344,7 @@ async function getPromoSubcategoryByCode(code: string) {
     });
 }
 
-async function getPromoTypologyByCode(code: string) {
+async function getPromoTypologyByCode(code: string, strapi: any) {
   if (!code) return null;
   return await strapi.db.query('api::promo-typology.promo-typology').findOne({
     where: { code: code },

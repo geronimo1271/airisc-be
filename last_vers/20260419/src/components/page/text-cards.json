@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_page_text_cards",
+  "info": {
+    "displayName": "Text Cards",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.text-item",
+      "min": 3,
+      "max": 5
+    }
+  }
+}

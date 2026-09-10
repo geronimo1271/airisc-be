@@ -1,0 +1,38 @@
+{
+  "collectionName": "components_promo_promo_cards",
+  "info": {
+    "displayName": "Promo Cards",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_target": {
+      "type": "enumeration",
+      "enum": [
+        "stessa_scheda",
+        "nuova_scheda"
+      ],
+      "default": "stessa_scheda"
+    },
+    "promos": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::promo.promo"
+    }
+  }
+}

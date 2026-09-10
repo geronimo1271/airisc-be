@@ -66,3 +66,12 @@ brew services stop redis
 
 brew uninstall redis
 
+
+Copiare i files (no .env, .git, ....)
+Su OPC:
+
+yarn install --frozen-lockfile
+yarn build
+pm2 restart live-and-work-be
+pm2 logs
+

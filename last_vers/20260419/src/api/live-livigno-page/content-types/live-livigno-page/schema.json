@@ -1,0 +1,74 @@
+{
+  "kind": "singleType",
+  "collectionName": "live_livigno_pages",
+  "info": {
+    "singularName": "live-livigno-page",
+    "pluralName": "live-livigno-pages",
+    "displayName": "Vivere a Livigno - Pagina"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "title": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "string"
+    },
+    "text": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "blocks": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "page.faq-items",
+        "page.job-offer-cards",
+        "page.logos",
+        "page.newsletter-card",
+        "page.slider-cards",
+        "page.testimonial-cards",
+        "page.text-cards",
+        "page.text-images",
+        "page.text-media",
+        "page.job-application-card",
+        "promo.promo-cards",
+        "page.app-links-card",
+        "page.livigno-card-form",
+        "page.slider-hero"
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.seo"
+    }
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "kind": "singleType",
+  "collectionName": "homepages",
+  "info": {
+    "singularName": "homepage",
+    "pluralName": "homepages",
+    "displayName": "Homepage",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {
+    "i18n": {
+      "localized": true
+    }
+  },
+  "attributes": {
+    "blocks": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "dynamiczone",
+      "components": [
+        "page.slider-cards",
+        "page.text-cards",
+        "page.logos",
+        "page.faq-items",
+        "page.text-images",
+        "page.job-offer-cards",
+        "page.testimonial-cards",
+        "page.newsletter-card",
+        "page.text-media",
+        "page.job-application-card",
+        "page.app-links-card",
+        "promo.promo-cards",
+        "page.livigno-card-form",
+        "page.slider-hero",
+        "page.content-intro",
+        "page.content-chapter"
+      ]
+    },
+    "seo": {
+      "type": "component",
+      "repeatable": false,
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "component": "shared.seo"
+    }
+  }
+}

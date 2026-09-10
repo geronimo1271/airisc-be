@@ -5,7 +5,13 @@
     "rootDir": ".",
     "sourceMap": true
   },
-  "include": ["./", "./**/*.ts", "./**/*.js", "src/**/*.json"],
+  "include": [
+    "config/**/*.ts",
+    "src/**/*.ts",
+    "src/**/*.json",
+    "types/generated/**/*.ts",
+    "types/generated/**/*.d.ts"
+  ],
   "exclude": [
     "node_modules/",
     "build/",

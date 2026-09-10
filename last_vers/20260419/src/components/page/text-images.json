@@ -1,0 +1,42 @@
+{
+  "collectionName": "components_page_text_images",
+  "info": {
+    "displayName": "Text Images",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.links"
+    },
+    "img_cards_placement": {
+      "type": "enumeration",
+      "enum": ["sinistra", "destra"],
+      "default": "sinistra"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": true,
+      "allowedTypes": ["images"]
+    },
+    "background_color": {
+      "type": "enumeration",
+      "enum": ["bianco", "lavanda"],
+      "default": "bianco"
+    }
+  }
+}

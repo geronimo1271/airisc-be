@@ -10,7 +10,8 @@ const strapi_1 = require("@strapi/strapi");
 const configuration_1 = __importDefault(require("./configuration"));
 exports.default = strapi_1.factories.createCoreService('api::newsletter.newsletter', ({ strapi }) => ({
     async upsert(body) {
-        const { email, news, events, monthly_conventions, advices, training_courses, new_job_offers, new_conventions, } = body;
+        const { email, news, events, monthly_conventions, advices, training_courses, new_job_offers, new_conventions, locale: localeRaw, } = body;
+        const locale = typeof localeRaw === 'string' && localeRaw.length > 0 ? localeRaw : 'it';
         const exists = await strapi.db
             .query('api::newsletter.newsletter')
             .findOne({
@@ -34,6 +35,7 @@ exports.default = strapi_1.factories.createCoreService('api::newsletter.newslett
                         ? exists.new_conventions
                         : new_conventions,
                 },
+                locale,
             });
             return {
                 id: newsletterObj.id,
@@ -51,6 +53,7 @@ exports.default = strapi_1.factories.createCoreService('api::newsletter.newslett
                 new_job_offers,
                 new_conventions,
             },
+            locale,
         });
         return {
             id: newsletterObj.id,

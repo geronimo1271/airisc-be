@@ -1,0 +1,47 @@
+{
+  "kind": "collectionType",
+  "collectionName": "contact_assistances",
+  "info": {
+    "singularName": "contact-assistance",
+    "pluralName": "contact-assistances",
+    "displayName": "Contatti - Assistenza",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "surname": {
+      "type": "string",
+      "required": true
+    },
+    "email": {
+      "type": "email",
+      "required": true
+    },
+    "phone_number": {
+      "type": "string",
+      "required": true
+    },
+    "text": {
+      "type": "text",
+      "required": true,
+      "maxLength": 400
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "richiesta_assistenza",
+        "segnalazione_problema",
+        "richiesta_informazioni",
+        "altro"
+      ],
+      "required": true
+    }
+  }
+}

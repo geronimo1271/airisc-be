@@ -7,7 +7,7 @@ module.exports = {
       name: pkg.name,
       cwd: `${process.env.PWD}`,
       autorestart: true,
-      script: 'server.js',
+      script: 'server.cjs',
       instances,
       env_staging: {
         NODE_ENV: 'staging',

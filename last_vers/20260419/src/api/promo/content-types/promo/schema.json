@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "promos",
+  "info": {
+    "singularName": "promo",
+    "pluralName": "promos",
+    "displayName": "Promozione",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "json",
+      "required": true
+    },
+    "code": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "address": {
+      "type": "string"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::promo-category.promo-category",
+      "inversedBy": "promos"
+    },
+    "subcategories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::promo-subcategory.promo-subcategory",
+      "mappedBy": "promos"
+    },
+    "typologies": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::promo-typology.promo-typology",
+      "mappedBy": "promos"
+    }
+  }
+}

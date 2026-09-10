@@ -7,29 +7,50 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const strapi_1 = require("@strapi/strapi");
-const utils_1 = require("@strapi/utils");
 const axios_1 = __importDefault(require("axios"));
+/** Evita ERR_INVALID_URL se la variabile manca o non è un URL assoluto (cron / .env). */
+function readPromoApiUrl(envKey) {
+    const raw = process.env[envKey];
+    if (raw == null || String(raw).trim() === '') {
+        return null;
+    }
+    try {
+        return new URL(String(raw).trim());
+    }
+    catch {
+        console.warn(`[promo service] ${envKey} non è un URL valido (valore ignorato)`);
+        return null;
+    }
+}
 exports.default = strapi_1.factories.createCoreService('api::promo.promo', ({ strapi }) => ({
     async import() {
-        console.log(`[promo service] - Importing promos - start`);
-        // API URL for categories import
-        await upsertPromoCategories(strapi);
-        // import typlogies
-        await upsertPromoTypologies(strapi);
-        // import promos
-        const upsertPromosCount = await upsertPromos(strapi);
-        console.log(`[promo service] - Importing promos - end`);
-        return upsertPromosCount;
+        try {
+            console.log(`[promo service] - Importing promos - start`);
+            await upsertPromoCategories(strapi);
+            await upsertPromoTypologies(strapi);
+            const upsertPromosCount = await upsertPromos(strapi);
+            console.log(`[promo service] - Importing promos - end`);
+            return upsertPromosCount;
+        }
+        catch (error) {
+            console.error('[promo service] Import fallito:', error);
+            return 0;
+        }
     },
 }));
 async function upsertPromoCategories(strapi) {
     console.log(`[promo service] - [upsertPromoCategories] - start`);
+    const baseUrl = readPromoApiUrl('PROMO_CATEGORIES_API_URL');
+    if (!baseUrl) {
+        console.warn('[promo service] [upsertPromoCategories] skipped: imposta PROMO_CATEGORIES_API_URL nel .env (URL assoluto)');
+        return;
+    }
     const sharedService = strapi.service('api::shared.shared');
     const locales = ['en', 'it', 'de'];
     const categoriesMap = {};
     const subCategoriesMap = {};
     for (const locale of locales) {
-        const apiUrl = new URL((0, utils_1.env)('PROMO_CATEGORIES_API_URL'));
+        const apiUrl = new URL(baseUrl.href);
         apiUrl.searchParams.append('locale', locale);
         const categoriesResponse = await axios_1.default.get(apiUrl.toString());
         if (categoriesResponse.status === 200) {
@@ -108,11 +129,16 @@ async function upsertPromoCategories(strapi) {
 }
 async function upsertPromoTypologies(strapi) {
     console.log(`[promo service] - [upsertPromoTypologies] - start`);
+    const baseUrl = readPromoApiUrl('PROMO_TYPOLOGIES_API_URL');
+    if (!baseUrl) {
+        console.warn('[promo service] [upsertPromoTypologies] skipped: imposta PROMO_TYPOLOGIES_API_URL nel .env (URL assoluto)');
+        return;
+    }
     const sharedService = strapi.service('api::shared.shared');
     const locales = ['en', 'it', 'de'];
     const typologiesMap = {};
     for (const locale of locales) {
-        const apiUrl = new URL((0, utils_1.env)('PROMO_TYPOLOGIES_API_URL'));
+        const apiUrl = new URL(baseUrl.href);
         apiUrl.searchParams.append('locale', locale);
         const typologiesResponse = await axios_1.default.get(apiUrl.toString());
         if (typologiesResponse.status === 200) {
@@ -156,11 +182,16 @@ async function upsertPromoTypologies(strapi) {
 async function upsertPromos(strapi) {
     var _a, _b;
     console.log(`[promo service] - [upsertPromos] - start`);
+    const baseUrl = readPromoApiUrl('PROMO_PRODUCTS_API_URL');
+    if (!baseUrl) {
+        console.warn('[promo service] [upsertPromos] skipped: imposta PROMO_PRODUCTS_API_URL nel .env (URL assoluto)');
+        return 0;
+    }
     const sharedService = strapi.service('api::shared.shared');
     const locales = ['en', 'it', 'de'];
     const promosMap = {};
     for (const locale of locales) {
-        const apiUrl = new URL((0, utils_1.env)('PROMO_PRODUCTS_API_URL'));
+        const apiUrl = new URL(baseUrl.href);
         apiUrl.searchParams.append('locale', locale);
         const promosResponse = await axios_1.default.get(apiUrl.toString());
         if (promosResponse.status !== 200) {
@@ -169,19 +200,19 @@ async function upsertPromos(strapi) {
         const promos = promosResponse.data.products[`C-CREW`].services;
         for (const promo of promos) {
             if (!promosMap[promo.code]) {
-                const categoryId = (_b = (await getPromoCategoryByCode((_a = promo.category) === null || _a === void 0 ? void 0 : _a.code))) === null || _b === void 0 ? void 0 : _b.id;
+                const categoryId = (_b = (await getPromoCategoryByCode((_a = promo.category) === null || _a === void 0 ? void 0 : _a.code, strapi))) === null || _b === void 0 ? void 0 : _b.id;
                 const subcategoryIds = [];
                 const typologyIds = [];
                 const subcategories = promo.subcategories || [];
                 const typologies = promo.typologies || [];
                 for (const subcategory of subcategories) {
-                    const subId = await getPromoSubcategoryByCode(subcategory.code);
+                    const subId = await getPromoSubcategoryByCode(subcategory.code, strapi);
                     if (subId) {
                         subcategoryIds.push(subId.id);
                     }
                 }
                 for (const typology of typologies) {
-                    const typologyId = await getPromoTypologyByCode(typology.code);
+                    const typologyId = await getPromoTypologyByCode(typology.code, strapi);
                     if (typologyId) {
                         typologyIds.push(typologyId.id);
                     }
@@ -224,7 +255,7 @@ async function upsertPromos(strapi) {
     console.log(`[promo service] -  [upsertPromos] Count: ${Object.keys(promosMap).length} - end`);
     return Object.keys(promosMap).length;
 }
-async function getPromoCategoryByCode(code) {
+async function getPromoCategoryByCode(code, strapi) {
     if (!code)
         return null;
     return await strapi.db.query('api::promo-category.promo-category').findOne({
@@ -232,7 +263,7 @@ async function getPromoCategoryByCode(code) {
         select: ['id'],
     });
 }
-async function getPromoSubcategoryByCode(code) {
+async function getPromoSubcategoryByCode(code, strapi) {
     if (!code)
         return null;
     return await strapi.db
@@ -242,7 +273,7 @@ async function getPromoSubcategoryByCode(code) {
         select: ['id'],
     });
 }
-async function getPromoTypologyByCode(code) {
+async function getPromoTypologyByCode(code, strapi) {
     if (!code)
         return null;
     return await strapi.db.query('api::promo-typology.promo-typology').findOne({

@@ -1,0 +1,64 @@
+{
+  "collectionName": "components_page_content_chapters",
+  "info": {
+    "displayName": "Content Chapter",
+    "icon": "file",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "customField",
+      "options": {
+        "output": "HTML",
+        "preset": "rich"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "link": {
+      "type": "component",
+      "repeatable": false,
+      "component": "shared.links"
+    },
+    "img_cards_placement": {
+      "type": "enumeration",
+      "enum": [
+        "sinistra",
+        "destra"
+      ],
+      "default": "sinistra"
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "videos",
+        "audios",
+        "files"
+      ]
+    },
+    "background_color": {
+      "type": "enumeration",
+      "enum": [
+        "bianco",
+        "lavanda"
+      ],
+      "default": "bianco"
+    },
+    "use_image": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    },
+    "use_pdf": {
+      "type": "boolean",
+      "default": false,
+      "required": true
+    }
+  }
+}

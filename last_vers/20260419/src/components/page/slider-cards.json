@@ -1,0 +1,37 @@
+{
+  "collectionName": "components_page_slider_cards",
+  "info": {
+    "displayName": "Slider Cards",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "description": {
+      "type": "text"
+    },
+    "background_color": {
+      "type": "enumeration",
+      "enum": ["bianco", "lavanda"],
+      "default": "lavanda"
+    },
+    "cta_label": {
+      "type": "string"
+    },
+    "cta_link": {
+      "type": "string"
+    },
+    "cta_placement": {
+      "type": "enumeration",
+      "enum": ["sinistra", "centro", "destro"],
+      "default": "centro"
+    },
+    "items": {
+      "type": "component",
+      "repeatable": true,
+      "component": "shared.card-item"
+    }
+  }
+}

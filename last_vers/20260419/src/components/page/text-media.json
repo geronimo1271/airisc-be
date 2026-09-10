@@ -1,0 +1,28 @@
+{
+  "collectionName": "components_page_text_medias",
+  "info": {
+    "displayName": "Text Media",
+    "icon": "play"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": false
+    },
+    "text": {
+      "type": "customField",
+      "required": false,
+      "options": {
+        "output": "HTML",
+        "preset": "standard"
+      },
+      "customField": "plugin::ckeditor.CKEditor"
+    },
+    "media": {
+      "allowedTypes": ["images", "videos"],
+      "type": "media",
+      "multiple": false
+    }
+  }
+}
