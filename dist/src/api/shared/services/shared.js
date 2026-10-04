@@ -52,8 +52,15 @@ exports.default = () => ({
         return newSlug;
     },
     redisConfig() {
+        var _a;
         const redisConf = strapi.config.get('plugin.redis.connections.default');
-        return new ioredis_1.default(redisConf.connection);
+        const connection = (_a = redisConf === null || redisConf === void 0 ? void 0 : redisConf.connection) !== null && _a !== void 0 ? _a : {
+            host: (0, utils_1.env)('REDIS_HOST', '127.0.0.1'),
+            port: Number((0, utils_1.env)('REDIS_PORT', '6379')),
+            db: Number((0, utils_1.env)('REDIS_DB', '0')),
+            keyPrefix: (0, utils_1.env)('REDIS_KEY_PREFIX', ''),
+        };
+        return new ioredis_1.default(connection);
     },
     getReadableString(word) {
         // Replace underscores or hyphens with spaces

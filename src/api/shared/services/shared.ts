@@ -92,10 +92,18 @@ export default () => ({
       };
     };
 
-    const redisConf = strapi.config.get<RedisConfig>(
+    const redisConf = strapi.config.get<RedisConfig | undefined>(
       'plugin.redis.connections.default'
     );
-    return new Redis(redisConf.connection);
+
+    const connection = redisConf?.connection ?? {
+      host: env('REDIS_HOST', '127.0.0.1'),
+      port: Number(env('REDIS_PORT', '6379')),
+      db: Number(env('REDIS_DB', '0')),
+      keyPrefix: env('REDIS_KEY_PREFIX', ''),
+    };
+
+    return new Redis(connection);
   },
   getReadableString(word: string) {
     // Replace underscores or hyphens with spaces
